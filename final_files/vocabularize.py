@@ -6,8 +6,11 @@ import multiprocessing as mp
 import os
 import re
 import string
+
+import pandas
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from IPython.display import display
 from tabulate import tabulate
 
 
@@ -137,7 +140,9 @@ def print_tables(docs, path, type):
             table.append([title, synopsis, url, similarity])
         else:
             table.append([title, synopsis, url])
-    print(tabulate(table, headers=headers, tablefmt="fancy_grid"))
+    df = pandas.DataFrame(table, columns=headers)
+    display(df)
+    #print(tabulate(table, headers=headers, tablefmt="fancy_grid"))
 
 
 def compute_tfIdf(words, start, end, vocab, tf_j_index, complex_index):
